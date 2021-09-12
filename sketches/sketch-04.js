@@ -3,25 +3,25 @@ const math = require('canvas-sketch-util/math')
 const random = require('canvas-sketch-util/random')
 
 const settings = {
-  dimensions: [ 1080, 1080 ]
+	dimensions: [1080, 1080]
 };
 
 const PALETTE = [
-  ["#0cecdd"],
-  ["#fff338"],
-  ["#ff67e7"],
-  ["#c400ff"],
+	["#0cecdd"],
+	["#fff338"],
+	["#ff67e7"],
+	["#c400ff"],
 ];
 
 const sketch = () => {
-  return ({ context, width, height }) => {
-    context.fillStyle = 'black';
-    context.fillRect(0, 0, width, height);
+	return ({ context, width, height }) => {
+		context.fillStyle = 'black';
+		context.fillRect(0, 0, width, height);
 
-		const cx = width  * 0.5;
+		const cx = width * 0.5;
 		const cy = height * 0.5;
 
-		const w = width  * 0.01;
+		const w = width * 0.01;
 		const h = height * 0.1;
 		let x, y;
 
@@ -43,14 +43,12 @@ const sketch = () => {
 
 			context.beginPath();
 			context.arc(0, 0, radius * random.range(0, 1.3), slice * random.range(8, -20), slice * random.range(1, 4));
-      let random_index = Math.floor(random.range(0, PALETTE.length));      
-      console.log(random_index);
-      context.strokeStyle  = PALETTE[random_index];
-      context.stroke();
+			context.strokeStyle = random.pick(PALETTE);
+			context.stroke();
 
-      context.restore();
-    }
-  };
+			context.restore();
+		}
+	};
 };
 
 canvasSketch(sketch, settings);
